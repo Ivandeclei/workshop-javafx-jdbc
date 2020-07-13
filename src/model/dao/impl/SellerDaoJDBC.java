@@ -127,6 +127,7 @@ public class SellerDaoJDBC implements SellerDao{
 				//instancia o resultset que vem no formato de tabela em Orientação a OBjeto
 				Department dep = instantiateDepartment(rs);
 				Seller obj = instantiateSeller(rs, dep);
+				System.out.println(obj);
 				return obj;
 				
 			}
@@ -147,7 +148,7 @@ public class SellerDaoJDBC implements SellerDao{
 		obj.setId(rs.getInt("Id"));
 		obj.setName(rs.getString("Name"));
 		obj.setEmail(rs.getString("Email"));
-		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime())); 
 		obj.setBaseSalary(rs.getDouble("BaseSalary"));
 		obj.setDepartment(dep);//a associacao deve ser feita pasando o objeto todo como na classe espera um objeto de associação
 		return obj;
